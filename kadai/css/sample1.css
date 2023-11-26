@@ -1,0 +1,92 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+main{
+    border-bottom:1px solid #ccc;
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    text-align: center;
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    text-align:center;
+  }
+  
+  td,
+  th {
+    box-sizing: border-box;
+  }
+  
+  td {
+    border: 1px solid #000;
+    width: 30vh;
+    height: 30vh;
+    cursor: pointer;
+  }
+  
+  tr:first-child td {
+    border-top: solid 2px #000;
+  }
+  
+  tr:last-child td {
+    border-bottom: solid 2px #000;
+  }
+  
+  td:first-child {
+    border-left: solid 2px #000;
+  }
+  
+  td:last-child {
+    border-right: solid 2px #000;
+  }
+
+  /* .win {
+    background-color: lightgreen; /* 勝ったセルに適用する背景色 */
+/* } */ 
+
+
+
+
+

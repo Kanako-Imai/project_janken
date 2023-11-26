@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけんアプリ</h1>
+</header>
+
+<main>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ちまけあいこ</div>
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+$("#gu_btn").on("click", function(){
+    //1.乱数（１～３）
+    let gu_btn = 1;
+    const comp = Math.ceil( Math.random()*3);
+    
+    //2.if分岐処理
+    let pc_hands = "";
+    let judgment = "";
+    if(comp==1){
+      pc_hands= 'ぐー';
+      judgment='あいこ';
+    }
+    else if(comp==2){
+      pc_hands='ちょき';
+      judgment='かち';
+    }
+    else if(comp==3){
+      pc_hands='ぱー';
+      judgment='まけ';
+    }
+    //3.表示処理
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+});
+
+$("#cho_btn").on("click", function(){
+    //1.乱数（１～３）
+    let cho_btn = 2; 
+    const comp = Math.ceil( Math.random()*3);
+    
+    //2.if分岐処理
+    let pc_hands = "";
+    let judgment = "";
+    if(comp==1){
+      pc_hands= 'ぐー';
+      judgment='まけ';
+    }
+    else if(comp==2){
+      pc_hands='ちょき';
+      judgment='あいこ';
+    }
+    else if(comp==3){
+      pc_hands='ぱー';
+      judgment='かち';
+    }
+    //3.表示処理
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+});  
+    
+$("#par_btn").on("click", function(){
+    //1.乱数（１～３）
+    let par_btn = 3; 
+    const comp = Math.ceil( Math.random()*3);
+    
+    //2.if分岐処理
+    let pc_hands = "";
+    let judgment = "";
+    if(comp==1){
+      pc_hands= 'ぐー';
+      judgment='かち';
+    }
+    else if(comp==2){
+      pc_hands='ちょき';
+      judgment='まけ';
+    }
+    else if(comp==3){
+      pc_hands='ぱー';
+      judgment='あいこ';
+    }
+    //3.表示処理
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+});  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+
+</script>
+</body>
+</html>

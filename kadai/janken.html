@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample1.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>じゃんけんアプリ</h1>
+</header>
+
+<button id="startButton" onclick="start();"><h2>スタート</h2></button>
+<button id="resetButton" onclick="resetGame();"><h2>リセット</h2></button>
+
+<main>
+  <ul>
+    <li id="gu_btn">グー</li>
+    <li id="cho_btn">チョキ</li>
+    <li id="par_btn">パー</li>
+  </ul>
+  <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgment">勝ちまけあいこ</div>
+  <p id="echo"></p>
+  <table id="resultTable">
+</main>
+<table id ="resultTable">
+    <tr>
+        <td class="td1">勝ち1</td>
+        <td class="td2">勝ち2</td>
+        <td class="td3">勝ち3</td>
+    </tr>
+    <tr>
+        <td class="td4">勝ち4</td>
+        <td class="td5">勝ち5</td>
+        <td class="td6">勝ち6</td>
+    </tr>
+    <tr>
+        <td class="td7">勝ち7</td>
+        <td class="td8">勝ち8</td>
+        <td class="td9">勝ち9</td>
+    </tr>
+</table>
+
+</main>
+
+<footer></footer>
+
+<script>
+const FPS = 4; // 1秒間に何回相手の手を更新するか
+const HANDS = ['✊', '✌️', '✋']; // 手の配列
+let lastRivalHandIndex = 0; // 最新のライバルの手をあらわす配列のインデックス
+let gameLoopIntervalId = null; // インターバル更新の Id
+let winCount = 0; //勝ちの回数
+
+// ゲームループ
+function gameLoop() {
+    const handIndex = (lastRivalHandIndex + 1) % 3;
+    lastRivalHandIndex = handIndex;
+    document.getElementById("pc_hands").textContent = HANDS[handIndex];
+}
+
+// ゲームループ開始
+function start() {
+    gameLoopIntervalId = setInterval(gameLoop, 1000 / FPS);
+}
+
+// リセットボタンのクリックイベント
+function resetGame() {
+    clearInterval(gameLoopIntervalId); // インターバル更新を停止
+    winCount = 0; // 勝ちの回数をリセット
+    $("#resultTable td").css('background-color', '');// テーブルの背景色をリセット
+    $("#pc_hands").html('なに？'); // コンピュータの出した手の表示をリセット
+    $("#judgment").html('勝ちまけあいこ'); // 勝ち負け引き分けの表示をリセット
+}
+
+
+
+
+
+// じゃんけんボタンのクリックイベント
+$("#gu_btn").on("click", function () {
+    janken ('グー');
+});
+
+$("#cho_btn").on("click", function () {
+    janken ('チョキ');
+});
+
+$("#par_btn").on("click", function () {
+    janken ('パー');
+});
+
+
+// じゃんけんボタンのクリックイベント
+function janken(playerHand) {
+    // ゲームループを停止
+    clearInterval(gameLoopIntervalId);
+
+    // じゃんけん用のSCRIPT
+    const comp = Math.ceil(Math.random() * 3);
+
+    // if分岐処理
+    let pc_hands = HANDS[comp - 1];
+    let judgment = "";
+    let view = "";
+    
+    if (playerHand === 'グー') {
+        if (comp === 1) {
+            judgment = 'あいこ';
+            view = '<img src="ganbare.jpeg" width=300>';
+        } else if (comp === 2) {
+            judgment = 'かち';
+            winCount++;
+            view = '<img src="omedetou.png" width=300>';
+        } else {
+            judgment = 'まけ';
+            view = '<img src="zannen.png" width=300>';
+        }
+    } else if (playerHand === 'チョキ') {
+        if (comp === 1) {
+            judgment = 'まけ';
+            view = '<img src="zannen.png" width=300>';
+        } else if (comp === 2) {
+            judgment = 'あいこ';
+            view = '<img src="ganbare.jpeg" width=300>';
+        } else {
+            judgment = 'かち';
+            winCount++;
+            view = '<img src="omedetou.png" width=300>';
+        }
+    } else if (playerHand === 'パー') {
+        if (comp === 1) {
+            judgment = 'かち';
+            winCount++;
+            view = '<img src="omedetou.png" width=300>';
+        } else if (comp === 2) {
+            judgment = 'まけ';
+            view = '<img src="zannen.png" width=300>';
+        } else {
+            judgment = 'あいこ';
+            view = '<img src="ganbare.jpeg" width=300>';
+        }
+    }
+
+    // 表示処理
+    $("#pc_hands").html(pc_hands);
+    $("#judgment").html(judgment);
+    $("#echo").html(view);
+   
+
+    //勝ちの回数に応じてセルに色をつける
+//     $(function(){
+//     $("#resultTalbe").highlightCell()
+// });
+//     if(winCount <=9){
+//         highlightCell(0, winCount - 1);
+//     }
+// }
+
+
+
+// // セルに色を付ける関数
+// function highlightCell() {
+//     $("#resultTable tr:eq(0) td:eq(" + (winCount - 1) + ")").addClass("win");
+// }
+// function highlightCell() {
+//     $("#resultTable tr:eq(0) td:eq(" + (winCount - 1) + ")").addClass("win");
+// }
+if (winCount===1){
+    // $(".td1").addClass("win");
+    $(".td1").css('background-color','red');
+}
+
+if (winCount===2){
+    $(".td2").css('background-color','red');
+}
+if (winCount===3){
+    $(".td3").css('background-color','red');
+}
+if (winCount===4){
+    $(".td4").css('background-color','red');
+}
+if (winCount===5){
+    $(".td5").css('background-color','red');
+}
+if (winCount===6){
+    $(".td6").css('background-color','red');
+}
+if (winCount===7){
+    $(".td7").css('background-color','red');
+}
+if (winCount===8){
+    $(".td8").css('background-color','red');
+}
+if (winCount===9){
+    $(".td9").css('background-color','red');
+}
+
+
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>
